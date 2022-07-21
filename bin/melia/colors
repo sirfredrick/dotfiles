@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Script is broken on dash for some reason
+
+busybox ash $HOME/bin/colors

@@ -1,0 +1,15 @@
+[user]
+	name = sirfredrick
+	email = sirfredrick@vivaldi.net
+[core]
+	editor = vim
+	autocrlf = input
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[sendemail]
+	smtpserver = smtp.vivaldi.net
+	smtpuser = sirfredrick@vivaldi.net
+	smtpencryption = ssl
+	smtpserverport = 465

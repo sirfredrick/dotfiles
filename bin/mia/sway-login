@@ -1,0 +1,18 @@
+#!/bin/sh
+
+login_sound() {
+	if [ $(uname) = "Linux" ]
+	then
+		# Wait until lockscreen appears
+		while [ "$(pidof swaylock)" = "" ]
+		do
+			sleep 1s
+		done
+		sleep 1s
+		play $HOME/videos/xenoblade-x.opus
+	fi
+}
+
+# Forks process to allow system to sleep
+# Login audio is disabled by default
+#login_sound &

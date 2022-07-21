@@ -1,0 +1,40 @@
+#!/bin/sh
+
+usage() {
+	printf "vid2img video hh:mm:ss.ms\n"
+	printf "vid2img help"
+	printf "vid2img -h"
+	exit 0
+}
+
+hflag=
+while getopts h name
+do
+	case $name in
+		h) usage
+		   ;;
+		?) usage
+		   ;;
+	esac
+done
+shift $(($OPTIND - 1))
+
+case $1 in
+	help) usage
+		  ;;
+esac
+
+if [ -z $1 ]
+then
+	printf "Video argument is required\n"
+elif [ -z $2 ]
+then
+	printf "Time arguement is required\n"
+fi
+if [ -z $1 -o -z $2 ]
+then
+	printf "Use -h to show usage\n"
+	exit 1
+fi
+
+ffmpeg -ss $2 -i $1 -vframes 1 -q:v 2 out.jpg

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+i=0
+j=1
+while [ $i -lt 255 ]
+do
+    printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
+    if [ $j -eq 15 ]
+    then
+        printf "\n";
+		j=0
+	fi
+	i=$(( i + 1 ))
+	j=$(( j + 1 ))
+done
+printf "\n"

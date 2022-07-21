@@ -1,0 +1,41 @@
+font:
+        size: 12
+        normal:
+                family: DejaVu Sans Mono
+                style: Regular
+        bold:
+                family: DejaVu Sans Mono, Bold
+        italic:
+                family: DejaVu Sans Mono, Italic
+shell:
+  program: /bin/busybox
+  args:
+    - ash
+colors:
+        primary:
+                background: '#162935'
+                foreground: '#b2d5de'
+        cursor:
+                text: '#162935'
+                cursor: '#b2d5de'
+        normal:
+                black: '#0d232e'
+                red: '#c47871'
+                green: '#1d9574'
+                yellow: '#595821'
+                blue: '#476bbb'
+                magenta: '#d16fbe'
+                cyan: '#128ca1'
+                white: '#d4e6e9'
+        bright:
+                black: '#3d6d8f'
+                red: '#c47871'
+                green: '#1d9574'
+                yellow: '#a0a348'
+                blue: '#5182ae'
+                magenta: '#d16fbe'
+                cyan: '#27dbbb'
+                white: '#d9ecf4'
+
+window:
+      opacity: 0.9

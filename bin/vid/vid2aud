@@ -1,0 +1,33 @@
+#!/bin/sh
+
+usage() {
+	printf "vid2aud video\n"
+	printf "vid2aud help\n"
+	printf "vid2aud -h\n"
+	exit 0
+}
+
+while getopts h name
+do
+	case $name in
+		h) usage
+		   ;;
+		?) usage
+		   ;;
+	esac
+done
+shift $(($OPTIND - 1))
+
+case $1 in
+	help) usage
+		  ;;
+esac
+
+if [ -z $1 ]
+then
+	printf "Video argument required\n"
+	printf "Use -h to show usage\n"
+	exit 1
+fi
+
+ffmpeg -i $1 -vn -acodec libopus out.opus

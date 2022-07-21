@@ -1,0 +1,89 @@
+#!/bin/sh
+
+# date_formatted=$(date "+%a %d-%m-%Y %l:%M:%S %p")
+
+time=$(date "+%H:%M")
+
+# Generate seconds and nanoseconds
+nano=$($HOME/bin/nanoseconds/nanoseconds)
+nano=$(expr 999999999 - $nano)
+seconds=$(date "+%S")
+seconds=$(expr 60 - $seconds)
+
+# Generate Hexadecimal values shown after battery percentage
+ten="10"
+num=$(expr $seconds / $ten)
+hex1=$(date "+%M%H")
+hex2=$ten$hex1$ten$num
+hex1=$ten$num$ten$hex1
+hex=$(printf "%X-%X" $hex1 $hex2)
+
+# Get network state
+connectivity=$(nmcli networking connectivity)
+offline=""
+if [ $connectivity = "none" ]
+then
+	offline="X OFFLINE"
+fi
+
+# Get battery percentage
+battery_info=$(upower --show-info $(upower --enumerate |\
+grep 'BAT') |\
+egrep "percentage" |\
+awk '{print $2}')
+
+battery=$(printf "%s.%s     %s     %s" $seconds $nano $battery_info $hex)
+
+# Read filename of current wallpaper from $HOME/bin/area.txt
+area=$(awk '{ print toupper( substr( $0, 1, 1 ) ) substr( $0, 2 ); }' $HOME/.local/share/backgrounds/area | tr -d '[:digit:]')
+# Volume settings
+volume="Vol: $(pamixer --get-volume)%"
+
+mute=$(pactl get-sink-mute @DEFAULT_SINK@)
+yes="yes"
+
+if [ "${mute#*$yes}" != "$mute" ]
+then
+	volume="Vol: --%"
+fi
+
+# Brightness settings
+bright=$(brightnessctl get)
+percentage=$(expr $bright / 75)
+bright=$(printf "Bright: %s%%" $percentage)
+
+
+# Get current hour and minute to calculate time of day
+hour=$(date "+%H")
+minute=$(date "+%M")
+if [ $hour -lt 5 ]
+then
+	time="$time | Late Night"
+elif [ $hour -lt 7 ]
+then
+	time="$time | Early Morning"
+elif [ $hour -lt 12 ]
+then
+	time="$time | Morning"
+elif [ $hour -lt 17 ]
+then
+	time="$time | Afternoon"
+elif [ $hour -lt 19 ]
+then
+	time="$time | Evening"
+elif [ $hour -lt 24 ]
+then
+	time="$time | Night"
+fi
+
+if [ $seconds -eq 30 ]
+then
+	case $minute in
+		0 | 15 | 30 | 45)
+			$HOME/bin/mia/mira/mira
+		;;
+	esac
+fi
+
+# Print out the bar. Spacing needs to be adjusted depending on the font
+echo "$offline                  $battery                  $volume $bright                                                     $area  $time"

@@ -1,0 +1,53 @@
+#!/bin/sh
+
+usage() {
+	printf "subyt [-n] YTID hh:mm:ss.ms hh:mm:ss.ms\n"
+	printf "subyt help"
+	printf "subyt -h"
+	exit 0
+}
+
+nflag=
+while getopts hn name
+do
+	case $name in
+		h) usage
+		   ;;
+		n) nflag=1
+		   ;;
+		?) usage
+		   ;;
+	esac
+done
+shift $(($OPTIND - 1))
+
+case $1 in
+	help) usage
+		  ;;
+esac
+
+if [ -z $1 ]
+then
+	printf "YouTube video ID is required\n"
+elif [ -z $2 ]
+then
+	printf "Start time is required\n"
+elif [ -z $3 ]
+then
+	printf "Duration is required\n"
+fi
+if [ -z $1 -o -z $2 -o -z $3 ]
+then
+	printf "Use -h to show usage\n"
+	exit 1
+fi
+
+n=
+if [ $nflag ]
+then
+	n="-n"
+fi
+
+vid=$(yt2vid $1)
+
+subvid $n $vid $2 $3
