@@ -38,7 +38,7 @@ exec brightnessctl set 10%
 
 output * bg $HOME/.local/share/backgrounds/day/slyvalum1.jpg fill
 
-exec_always echo "slyvalum1 " > $HOME/.local/share/backgrounds/area
+exec_always echo "slyvalum1\n\nHilal Meadow" > $HOME/.local/share/backgrounds/area
 
 #
 # Example configuration:

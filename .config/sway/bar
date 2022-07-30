@@ -35,7 +35,15 @@ awk '{print $2}')
 battery=$(printf "%s.%s     %s     %s" $seconds $nano $battery_info $hex)
 
 # Read filename of current wallpaper from $HOME/bin/area.txt
-area=$(awk '{ print toupper( substr( $0, 1, 1 ) ) substr( $0, 2 ); }' $HOME/.local/share/backgrounds/area | tr -d '[:digit:]')
+area=$(awk 'NR == 1 { print toupper( substr( $0, 1, 1 ) ) substr( $0, 2 ); }' $HOME/.local/share/backgrounds/area | tr -d '[:digit:]')
+icon=$(awk 'NR == 2 {print $0 }' $HOME/.local/share/backgrounds/area)
+location=$(awk 'NR == 3 { print $0 }' $HOME/.local/share/backgrounds/area)
+bar="|"
+if [ $location = "" ]
+then
+	bar=""
+fi
+
 # Volume settings
 volume="Vol: $(pamixer --get-volume)%"
 
@@ -86,4 +94,4 @@ then
 fi
 
 # Print out the bar. Spacing needs to be adjusted depending on the font
-echo "$offline                  $battery                  $volume $bright                                                     $area  $time"
+echo "$offline                  $battery                  $volume $bright              $area $bar $location   $icon  $time"

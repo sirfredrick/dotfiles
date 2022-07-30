@@ -1,65 +1,78 @@
 package main
 
 import (
-	"github.com/xyproto/wallutils"
 	"log"
 	"math/rand"
 	"os"
+	"os/exec"
 	"time"
 )
 
 type wallpaper struct {
 	filename string
+	location string
 	icon     rune
 }
 
 var day = []wallpaper{
 	wallpaper{
 		filename: "cauldros1",
+		location: "Mount M'gando",
 		icon:     '',
 	},
 	wallpaper{
 		filename: "cauldros2",
+		location: "Scholes Battlegrounds",
 		icon:     '',
 	},
 	wallpaper{
 		filename: "noctilum1",
+		location: "Canopied Nightwood",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "noctilum2",
+		location: "Middle Hushflood",
 		icon:     '盛',
 	},
 	wallpaper{
-		filename: "obilivia1",
+		filename: "oblivia1",
+		location: "          ",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "oblivia2",
+		location: "          ",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "oblivia3",
+		location: "          ",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "primordia1",
+		location: "West Janpath Plain",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "primordia2",
+		location: "          ",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "primordia3",
+		location: "Biahno Lake",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "slyvalum1",
+		location: "Hilal Meadow",
 		icon:     '',
 	},
 	wallpaper{
 		filename: "slyvalum2",
+		location: "Delusians South Summit",
 		icon:     '',
 	},
 }
@@ -67,18 +80,22 @@ var day = []wallpaper{
 var night = []wallpaper{
 	wallpaper{
 		filename: "cauldros1",
+		location: "FN Site 504",
 		icon:     '',
 	},
 	wallpaper{
 		filename: "noctilum1",
+		location: "          ",
 		icon:     '',
 	},
 	wallpaper{
 		filename: "noctilum2",
+		location: "Rustpool Banks BC",
 		icon:     '盛',
 	},
 	wallpaper{
 		filename: "slyvalum1",
+		location: "Needle Rock Sandsea",
 		icon:     'ﲋ',
 	},
 }
@@ -104,7 +121,8 @@ func changeWallpaper(wp wallpaper) {
 		path += "/night"
 	}
 	path += "/" + wp.filename + ".jpg"
-	err = wallutils.SetWallpaper(path)
+	cmd := exec.Command("swaymsg", "output * bg '"+path+"' fill")
+	err = cmd.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -121,7 +139,7 @@ func writeConfig(wp wallpaper) {
 		// Left-to-right mark
 		ltr += string('\u200e')
 	}
-	_, err = f.WriteString(wp.filename + " " + string(wp.icon) + ltr)
+	_, err = f.WriteString(wp.filename + "\n" + string(wp.icon) + ltr + "\n" + wp.location)
 	if err != nil {
 		log.Fatal(err)
 	}
