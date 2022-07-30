@@ -53,6 +53,7 @@ autocmd FileType cpp setlocal noet ts=8 sw=8 tw=80
 autocmd FileType go setlocal noet ts=4 sw=4
 autocmd FileType sh setlocal noet ts=4 sw=4
 autocmd FileType html setlocal et ts=2 sw=2
+autocmd FileType xml setlocal et ts=2 sw=2
 autocmd FileType css setlocal et ts=2 sw=2
 autocmd FileType scss setlocal et ts=2 sw=2
 autocmd FileType markdown setlocal et ts=2 sw=2 tw=80
