@@ -64,6 +64,11 @@ let g:fzf_layout = { 'window': { 'width': 1.0, 'height': 0.5, 'relative': v:true
 
 nnoremap <C-p> :FZF<cr>
 
+" EditorConfig config
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+autocmd BufEnter * :EditorConfigReload " Fixes a bug when using neovim
+
 " Default file indentation
 
 autocmd FileType c setlocal noet ts=8 sw=8 tw=80
