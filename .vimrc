@@ -6,9 +6,28 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'https://git.sr.ht/~sircmpwn/hare.vim'
+if has('nvim-0.7')
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+else
+  Plug 'sheerun/vim-polyglot'
+endif
 call plug#end()
 
+if has('nvim-0.7')
+lua << EOF
+  require'nvim-treesitter.configs'.setup {
+    highlight = {
+      enable = true,
+    }
+  }
+EOF
+endif
+
 set t_Co=256 " 256 colors
+let g:nvcode_termcolors=256
+
+syntax on
+colorscheme lifehold
 
 set encoding=utf-8
 set tabstop=8
@@ -70,5 +89,3 @@ autocmd FileType tex setlocal noet ts=2 sw=2 tw=80
 autocmd FileType text setlocal tw=80
 autocmd BufNewFile,BufRead * if expand('%:t') == 'APKBUILD' | set ft=sh | endif
 autocmd BufNewFile,BufRead * if expand('%:t') == 'PKGBUILD' | set ft=sh | endif
-
-source $HOME/.config/nvim/`hostname`.vim
