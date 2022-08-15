@@ -85,7 +85,7 @@ autocmd BufRead,BufNewFile *.js setlocal et ts=2 sw=2
 autocmd FileType json setlocal et ts=2 sw=2
 autocmd FileType toml setlocal et ts=2 sw=2
 autocmd FileType yaml setlocal et ts=2 sw=2
-autocmd FileType meson setlocal noet ts=2 sw=2
+autocmd FileType meson setlocal et ts=2 sw=2
 autocmd FileType typescript setlocal et ts=2 sw=2
 autocmd FileType python setlocal et ts=4 sw=4
 autocmd FileType java setlocal et ts=4 sw=4 tw=80
