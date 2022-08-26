@@ -87,10 +87,10 @@ autocmd FileType toml setlocal et ts=2 sw=2
 autocmd FileType yaml setlocal et ts=2 sw=2
 autocmd FileType meson setlocal et ts=2 sw=2
 autocmd FileType typescript setlocal et ts=2 sw=2
-autocmd FileType python setlocal et ts=4 sw=4
-autocmd FileType java setlocal et ts=4 sw=4 tw=80
-autocmd FileType cs setlocal et ts=4 sw=4 tw=80
-autocmd FileType tex setlocal noet ts=2 sw=2 tw=80
+autocmd FileType python setlocal et ts=4 sw=4 tw=79
+autocmd FileType java setlocal et ts=4 sw=4 tw=100
+autocmd FileType cs setlocal et ts=4 sw=4 tw=100
+autocmd FileType tex setlocal et ts=4 sw=4 tw=80
 autocmd FileType text setlocal tw=80
 autocmd BufNewFile,BufRead * if expand('%:t') == 'APKBUILD' | set ft=sh | endif
 autocmd BufNewFile,BufRead * if expand('%:t') == 'PKGBUILD' | set ft=sh | endif
