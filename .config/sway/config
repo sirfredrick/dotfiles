@@ -234,7 +234,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 bindsym $mod+Shift+p exec grimshot save area
 bindsym $mod+p exec grimshot save output
-bindsym $mod+Shift+Escape exec $HOME/bin/mia/sway-login && loginctl suspend
+bindsym $mod+Shift+Escape exec $HOME/bin/mia/sway-login && swaylock -f -i $HOME/.local/share/backgrounds/login.jpg && loginctl suspend
 
 seat seat0 xcursor_theme Lifehold 32
 
